@@ -49,7 +49,7 @@ Below are some screenshots of the application:
 ![Delete Page](screenshots/delete-page.jpeg)
 
 ### Data Validation
-![Data Validation](screenshots/data-validaition.jpeg)
+![Data Validation](screenshots/data-validation.jpeg)
 
 ## Getting Started
 ### Prerequisites
