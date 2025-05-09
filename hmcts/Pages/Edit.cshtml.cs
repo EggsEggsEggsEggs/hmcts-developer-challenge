@@ -8,7 +8,7 @@ namespace hmcts.Pages;
 public class EditModel(Data.HmctsContext context) : PageModel
 {
     [BindProperty]
-    public Case Case { get; set; } = default!;
+    public Case Case { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -29,7 +29,17 @@ public class EditModel(Data.HmctsContext context) : PageModel
         if (!ModelState.IsValid)
             return Page();
 
-        context.Attach(Case).State = EntityState.Modified;
+        // Retrieve the existing entity from the database
+        var existingCase = await context.Case.FirstOrDefaultAsync(c => c.Id == Case.Id);
+        if (existingCase == null)
+            return NotFound();
+
+        // Update the properties of the existing entity
+        existingCase.CaseNumber = Case.CaseNumber;
+        existingCase.Title = Case.Title;
+        existingCase.Description = Case.Description;
+        existingCase.Status = Case.Status;
+        existingCase.CreatedDate = Case.CreatedDate;
 
         try
         {

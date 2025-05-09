@@ -7,14 +7,12 @@ namespace hmcts.Pages;
 
 public class DetailsModel(hmcts.Data.HmctsContext context) : PageModel
 {
-    public Case Case { get; set; } = default!;
+    public Case Case { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
         if (id == null)
-        {
             return NotFound();
-        }
 
         var caseEntity = await context.Case.FirstOrDefaultAsync(m => m.Id == id);
 

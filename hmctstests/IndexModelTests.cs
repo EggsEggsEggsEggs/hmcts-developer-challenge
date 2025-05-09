@@ -2,7 +2,6 @@
 using hmcts.Models;
 using hmcts.Pages;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 
 namespace hmctstests;
 
@@ -17,12 +16,6 @@ public class IndexTests
             new() { Id = 1, CaseNumber = "C123", Title = "Case 1", Description = "Description 1", Status = "Open", CreatedDate = DateTime.Now },
             new() { Id = 2, CaseNumber = "C124", Title = "Case 2", Description = "Description 2", Status = "Closed", CreatedDate = DateTime.Now }
         }.AsQueryable();
-
-        var mockSet = new Mock<DbSet<Case>>();
-        mockSet.As<IQueryable<Case>>().Setup(m => m.Provider).Returns(mockCases.Provider);
-        mockSet.As<IQueryable<Case>>().Setup(m => m.Expression).Returns(mockCases.Expression);
-        mockSet.As<IQueryable<Case>>().Setup(m => m.ElementType).Returns(mockCases.ElementType);
-        mockSet.As<IQueryable<Case>>().Setup(m => m.GetEnumerator()).Returns(mockCases.GetEnumerator());
 
         var mockOptions = new DbContextOptionsBuilder<HmctsContext>().UseInMemoryDatabase("hmctsContext").Options;
 

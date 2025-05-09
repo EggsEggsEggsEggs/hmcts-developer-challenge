@@ -9,7 +9,7 @@ public class DeleteModel(hmcts.Data.HmctsContext context) : PageModel
 {
 
     [BindProperty]
-    public Case Case { get; set; } = default!;
+    public Case Case { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
