@@ -1,0 +1,46 @@
+﻿@page
+@model hmcts.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Cases";
+}
+
+<h1 class="govuk-heading-xl">Cases</h1>
+
+<p>
+    <govuk-button-link is-start-button="true" asp-page="Create">Create New</govuk-button-link>
+</p>
+
+    <govuk-summary-list>  
+       @foreach (var item in Model.Case)  
+       {  
+           <govuk-summary-list-row>  
+               <govuk-summary-list-row-key>Case Number</govuk-summary-list-row-key>  
+               <govuk-summary-list-row-value>@Html.DisplayFor(modelItem => item.CaseNumber)</govuk-summary-list-row-value>  
+           </govuk-summary-list-row>  
+           <govuk-summary-list-row>  
+               <govuk-summary-list-row-key>Title</govuk-summary-list-row-key>  
+               <govuk-summary-list-row-value>@Html.DisplayFor(modelItem => item.Title)</govuk-summary-list-row-value>  
+           </govuk-summary-list-row>  
+           <govuk-summary-list-row>  
+               <govuk-summary-list-row-key>Description</govuk-summary-list-row-key>  
+               <govuk-summary-list-row-value>@Html.DisplayFor(modelItem => item.Description)</govuk-summary-list-row-value>  
+           </govuk-summary-list-row>  
+           <govuk-summary-list-row>  
+               <govuk-summary-list-row-key>Status</govuk-summary-list-row-key>  
+               <govuk-summary-list-row-value>@Html.DisplayFor(modelItem => item.Status)</govuk-summary-list-row-value>  
+           </govuk-summary-list-row>  
+           <govuk-summary-list-row>  
+               <govuk-summary-list-row-key>Created Date</govuk-summary-list-row-key>  
+               <govuk-summary-list-row-value>@Html.DisplayFor(modelItem => item.CreatedDate)</govuk-summary-list-row-value>  
+           </govuk-summary-list-row>  
+           <govuk-summary-list-row>  
+               <govuk-summary-list-row-key>Actions</govuk-summary-list-row-key>  
+               <govuk-summary-list-row-value>  
+                   <govuk-button-link asp-page="./Edit" asp-route-id="@item.Id">Edit</govuk-button-link> |  
+                   <govuk-button-link asp-page="./Details" asp-route-id="@item.Id">Details</govuk-button-link> |  
+                   <govuk-button-link asp-page="./Delete" asp-route-id="@item.Id">Delete</govuk-button-link>  
+               </govuk-summary-list-row-value>  
+           </govuk-summary-list-row>  
+       }  
+    </govuk-summary-list>

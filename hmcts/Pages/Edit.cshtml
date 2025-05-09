@@ -1,0 +1,54 @@
+﻿@page
+@model hmcts.Pages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="govuk-heading-xl">Edit</h1>
+
+<hr />
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+        <form method="post">
+            <govuk-error-summary asp-validation-summary="ModelOnly"></govuk-error-summary>
+            <input type="hidden" asp-for="Case.Id" />
+
+            <govuk-input disabled asp-for="Case.CaseNumber"
+                              label-text="Case Number"
+                              error-message-asp-for="Case.CaseNumber">
+            </govuk-input>
+
+            <govuk-input asp-for="Case.Title"
+                              label-text="Title"
+                              error-message-asp-for="Case.Title">
+            </govuk-input>
+
+            <govuk-textarea asp-for="Case.Description"
+                            label-text="Description"
+                            error-message-asp-for="Case.Description">
+            </govuk-textarea>
+
+            <govuk-input asp-for="Case.Status"
+                              label-text="Status"
+                              error-message-asp-for="Case.Status">
+            </govuk-input>
+
+            <govuk-date-input asp-for="Case.CreatedDate"
+                              label-text="Created Date"
+                              error-message-asp-for="Case.CreatedDate">
+            </govuk-date-input>
+
+            <div class="govuk-button-group">
+                <govuk-button type="submit">Save</govuk-button>
+                <govuk-back-link asp-page="./Index">Back to List</govuk-back-link>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

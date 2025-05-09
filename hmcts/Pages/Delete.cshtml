@@ -1,0 +1,41 @@
+﻿@page
+@model hmcts.Pages.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 class="govuk-heading-xl">Delete</h1>
+
+<h3 class="govuk-heading-l">Are you sure you want to delete this?</h3>
+
+<govuk-summary-list>
+    <govuk-summary-list-row>
+        <govuk-summary-list-row-key>Case Number</govuk-summary-list-row-key>
+        <govuk-summary-list-row-value>@Html.DisplayFor(model => model.Case.CaseNumber)</govuk-summary-list-row-value>
+    </govuk-summary-list-row>
+    <govuk-summary-list-row>
+        <govuk-summary-list-row-key>Title</govuk-summary-list-row-key>
+        <govuk-summary-list-row-value>
+            @Html.DisplayFor(model => model.Case.Title)</govuk-summary-list-row-value>
+    </govuk-summary-list-row>
+    <govuk-summary-list-row>
+        <govuk-summary-list-row-key>Description</govuk-summary-list-row-key>
+            <govuk-summary-list-row-value>@Html.DisplayFor(model => model.Case.Description)</govuk-summary-list-row-value>
+    </govuk-summary-list-row>
+    <govuk-summary-list-row>
+        <govuk-summary-list-row-key>Status</govuk-summary-list-row-key>
+        <govuk-summary-list-row-value>@Html.DisplayFor(model => model.Case.Status)</govuk-summary-list-row-value>
+    </govuk-summary-list-row>
+    <govuk-summary-list-row>
+        <govuk-summary-list-row-key>Created Date</govuk-summary-list-row-key>
+        <govuk-summary-list-row-value>@Html.DisplayFor(model => model.Case.CreatedDate)</govuk-summary-list-row-value>
+    </govuk-summary-list-row>
+</govuk-summary-list>
+
+<form method="post">
+    <input type="hidden" asp-for="Case.Id" />
+    <govuk-button type="submit" classes="govuk-button--warning">Delete</govuk-button>
+    <govuk-back-link asp-page="./Index">Back to List</govuk-back-link>
+</form>
+

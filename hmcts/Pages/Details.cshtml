@@ -1,0 +1,36 @@
+﻿@page
+@model hmcts.Pages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="govuk-heading-xl">Details</h1>
+
+<govuk-summary-list>
+    <govuk-summary-list-row>
+        <govuk-summary-list-row-key>Case Number</govuk-summary-list-row-key>
+        <govuk-summary-list-row-value>@Html.DisplayFor(model => model.Case.CaseNumber)</govuk-summary-list-row-value>
+    </govuk-summary-list-row>
+    <govuk-summary-list-row>
+        <govuk-summary-list-row-key>Title</govuk-summary-list-row-key>
+        <govuk-summary-list-row-value>@Html.DisplayFor(model => model.Case.Title)</govuk-summary-list-row-value>
+    </govuk-summary-list-row>
+    <govuk-summary-list-row>
+        <govuk-summary-list-row-key>Description</govuk-summary-list-row-key>
+        <govuk-summary-list-row-value>@Html.DisplayFor(model => model.Case.Description)</govuk-summary-list-row-value>
+    </govuk-summary-list-row>
+    <govuk-summary-list-row>
+        <govuk-summary-list-row-key>Status</govuk-summary-list-row-key>
+        <govuk-summary-list-row-value>@Html.DisplayFor(model => model.Case.Status)</govuk-summary-list-row-value>
+    </govuk-summary-list-row>
+    <govuk-summary-list-row>
+        <govuk-summary-list-row-key>Created Date</govuk-summary-list-row-key>
+        <govuk-summary-list-row-value>@Html.DisplayFor(model => model.Case.CreatedDate)</govuk-summary-list-row-value>
+    </govuk-summary-list-row>
+</govuk-summary-list>
+
+<div class="govuk-button-group">
+    <govuk-button-link asp-page="./Edit" asp-route-id="@Model.Case.Id">Edit</govuk-button-link>
+    <govuk-back-link asp-page="./Index">Back to List</govuk-back-link>
+</div>
