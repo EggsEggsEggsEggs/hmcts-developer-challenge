@@ -1,12 +1,20 @@
-﻿using hmcts.Models;
+﻿using hmcts.Data;
+using hmcts.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace hmcts.Pages;
-
-public class IndexModel(Data.HmctsContext context) : PageModel
+public class IndexModel : PageModel
 {
-    public IList<Case> Case { get; set; } = default!;
+    private readonly HmctsContext context;
+
+    public IndexModel(HmctsContext context)
+    {
+        this.context = context;
+        Case = new List<Case>(); // Initialize the Case property
+    }
+
+    public List<Case> Case { get; set; }
 
     public async Task OnGetAsync()
     {
