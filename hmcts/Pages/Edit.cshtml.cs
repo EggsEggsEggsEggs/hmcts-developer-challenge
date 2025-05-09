@@ -17,9 +17,8 @@ public class EditModel(Data.HmctsContext context) : PageModel
 
         var caseEntity = await context.Case.FirstOrDefaultAsync(m => m.Id == id);
         if (caseEntity == null)
-        {
             return NotFound();
-        }
+
         Case = caseEntity;
         return Page();
     }
@@ -57,7 +56,6 @@ public class EditModel(Data.HmctsContext context) : PageModel
     }
 
     private bool CaseExists(int id)
-    {
-        return context.Case.Any(e => e.Id == id);
-    }
+        => context.Case.Any(e => e.Id == id);
+
 }

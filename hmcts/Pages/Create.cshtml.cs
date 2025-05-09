@@ -10,9 +10,7 @@ public class CreateModel(Data.HmctsContext Context) : PageModel
     public Case Case { get; set; } = default!;
 
     public IActionResult OnGet()
-    {
-        return Page();
-    }
+        => Page();
 
     public async Task<IActionResult> OnPostAsync()
     {

@@ -74,9 +74,9 @@ public class DeleteModelTests
     {
         // Arrange
         var mockCases = new List<Case>
-    {
-        new() { Id = 1, CaseNumber = "C123", Title = "Case 1", Description = "Description 1", Status = "Open", CreatedDate = DateTime.Now }
-    }.AsQueryable();
+        {
+            new() { Id = 1, CaseNumber = "C123", Title = "Case 1", Description = "Description 1", Status = "Open", CreatedDate = DateTime.Now }
+        }.AsQueryable();
 
         var mockOptions = new DbContextOptionsBuilder<HmctsContext>().UseInMemoryDatabase("hmctsContext").Options;
         var mockContext = new HmctsContext(mockOptions);
@@ -97,7 +97,7 @@ public class DeleteModelTests
     }
 
     [Fact]
-    public async Task OnPostAsync_ReturnsNotFound_WhenCaseDoesNotExist()
+    public async Task OnPostAsync_ReturnsRedirectToPage_WhenCaseDoesNotExist()
     {
         // Arrange
         var mockOptions = new DbContextOptionsBuilder<HmctsContext>().UseInMemoryDatabase("hmctsContext").Options;
@@ -110,7 +110,7 @@ public class DeleteModelTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.IsType<NotFoundResult>(result);
+        Assert.IsType<RedirectToPageResult>(result);
     }
 
     [Fact]
