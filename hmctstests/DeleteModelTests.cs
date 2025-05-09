@@ -68,4 +68,65 @@ public class DeleteModelTests
         Assert.NotNull(result);
         Assert.IsType<NotFoundResult>(result);
     }
+
+    [Fact]
+    public async Task OnPostAsync_RedirectsToIndex_WhenCaseIsDeleted()
+    {
+        // Arrange
+        var mockCases = new List<Case>
+    {
+        new() { Id = 1, CaseNumber = "C123", Title = "Case 1", Description = "Description 1", Status = "Open", CreatedDate = DateTime.Now }
+    }.AsQueryable();
+
+        var mockOptions = new DbContextOptionsBuilder<HmctsContext>().UseInMemoryDatabase("hmctsContext").Options;
+        var mockContext = new HmctsContext(mockOptions);
+        mockContext.Case.AddRange(mockCases);
+        mockContext.SaveChanges();
+
+        var pageModel = new DeleteModel(mockContext);
+
+        // Act
+        var result = await pageModel.OnPostAsync(1);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.IsType<RedirectToPageResult>(result);
+        var redirectResult = result as RedirectToPageResult;
+        Assert.Equal("./Index", redirectResult?.PageName);
+        Assert.Empty(mockContext.Case);
+    }
+
+    [Fact]
+    public async Task OnPostAsync_ReturnsNotFound_WhenCaseDoesNotExist()
+    {
+        // Arrange
+        var mockOptions = new DbContextOptionsBuilder<HmctsContext>().UseInMemoryDatabase("hmctsContext").Options;
+        var mockContext = new HmctsContext(mockOptions);
+
+        var pageModel = new DeleteModel(mockContext);
+
+        // Act
+        var result = await pageModel.OnPostAsync(99);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.IsType<NotFoundResult>(result);
+    }
+
+    [Fact]
+    public async Task OnPostAsync_ReturnsNotFound_WhenIdIsNull()
+    {
+        // Arrange
+        var mockOptions = new DbContextOptionsBuilder<HmctsContext>().UseInMemoryDatabase("hmctsContext").Options;
+        var mockContext = new HmctsContext(mockOptions);
+
+        var pageModel = new DeleteModel(mockContext);
+
+        // Act
+        var result = await pageModel.OnPostAsync(null);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.IsType<NotFoundResult>(result);
+    }
 }
